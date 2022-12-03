@@ -15,3 +15,19 @@ Node (JavaScript)
 cd 2022
 npm run start -- 2
 ```
+
+#### 2021
+##### Language
+Node (JavaScript)
+
+
+##### Requirements
+- node
+- npm
+
+##### How to run
+```bash
+# Running day 2 solution
+cd 2021
+npm run start -- 2
+```
