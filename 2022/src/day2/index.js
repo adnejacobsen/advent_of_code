@@ -11,12 +11,12 @@ class Day2 extends Day {
         super(2);
     }
 
-    #charToNum(char, offset) {
-        return char.toLowerCase().charCodeAt() - offset;
-    }
-
     preprocess(text) {
         return text.split("\n").map((line) => line.split(" "));
+    }
+
+    #charToNum(char, offset) {
+        return char.toLowerCase().charCodeAt() - offset;
     }
 
     partOne() {

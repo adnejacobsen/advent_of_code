@@ -5,13 +5,13 @@ class Day3 extends Day {
         super(3);
     }
 
+    preprocess(text) {
+        return text.split("\n").map((l) => l.split(""));
+    }
+
     #getPriority(item) {
         const offset = item === item.toLowerCase() ? 96 : 38;
         return item.charCodeAt() - offset;
-    }
-
-    preprocess(text) {
-        return text.split("\n").map((l) => l.split(""));
     }
 
     partOne() {
