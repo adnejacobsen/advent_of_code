@@ -1,16 +1,18 @@
 import fs from "fs";
 
 export class Day {
-    input;
     num;
+    #text;
 
     constructor(num) {
-        const text = fs.readFileSync(`src/day${num}/input.txt`, {
+        this.num = num;
+        this.#text = fs.readFileSync(`src/day${num}/input.txt`, {
             encoding: "utf-8",
         });
+    }
 
-        this.input = this.preprocess(text);
-        this.num = num;
+    get input() {
+        return this.preprocess(this.#text);
     }
 
     preprocess(text) {
@@ -26,7 +28,7 @@ export class Day {
     }
 
     solve() {
-        console.log(`Day ${this.num}`);
+        console.log(`2022 Day ${this.num}`);
         console.log(`Part 1: ${this.partOne()}`);
         console.log(`Part 2: ${this.partTwo()}`);
     }
