@@ -17,7 +17,7 @@ class Day6 extends Day {
             let chars = input.slice(index, index + length);
 
             done = chars.every((c) => {
-                return chars.filter((c2) => c2 === c).length === 1;
+                return chars.indexOf(c) === chars.lastIndexOf(c);
             });
 
             index++;
