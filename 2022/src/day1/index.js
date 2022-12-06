@@ -16,12 +16,12 @@ class Day1 extends Day {
             .sort((a, b) => b - a);
     }
 
-    partOne() {
-        return this.input[0];
+    partOne(input) {
+        return input[0];
     }
 
-    partTwo() {
-        return this.input.slice(0, 3).reduce((prev, curr) => prev + curr);
+    partTwo(input) {
+        return input.slice(0, 3).reduce((prev, curr) => prev + curr);
     }
 }
 

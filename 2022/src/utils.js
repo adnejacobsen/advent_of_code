@@ -1,35 +1,35 @@
 import fs from "fs";
 
 export class Day {
-    num;
-    #text;
+    #num;
 
     constructor(num) {
-        this.num = num;
-        this.#text = fs.readFileSync(`src/day${num}/input.txt`, {
-            encoding: "utf-8",
-        });
-    }
-
-    get input() {
-        return this.preprocess(this.#text);
+        this.#num = num;
     }
 
     preprocess(text) {
         return text.split("\n");
     }
 
-    partOne() {
+    #getInput() {
+        const text = fs.readFileSync(`src/day${this.#num}/input.txt`, {
+            encoding: "utf-8",
+        });
+
+        return this.preprocess(text);
+    }
+
+    partOne(input) {
         return null;
     }
 
-    partTwo() {
+    partTwo(input) {
         return null;
     }
 
     solve() {
-        console.log(`2022 Day ${this.num}`);
-        console.log(`Part 1: ${this.partOne()}`);
-        console.log(`Part 2: ${this.partTwo()}`);
+        console.log(`2022 Day ${this.#num}`);
+        console.log(`Part 1: ${this.partOne(this.#getInput())}`);
+        console.log(`Part 2: ${this.partTwo(this.#getInput())}`);
     }
 }

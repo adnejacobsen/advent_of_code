@@ -19,8 +19,8 @@ class Day2 extends Day {
         return char.toLowerCase().charCodeAt() - offset;
     }
 
-    partOne() {
-        return this.input.reduce((total, input) => {
+    partOne(input) {
+        return input.reduce((total, input) => {
             const elf = this.#charToNum(input[0], 97);
             const you = this.#charToNum(input[1], 120);
             const result = this.resultsMatrix[elf][you];
@@ -29,8 +29,8 @@ class Day2 extends Day {
         }, 0);
     }
 
-    partTwo() {
-        return this.input.reduce((total, input) => {
+    partTwo(input) {
+        return input.reduce((total, input) => {
             const elf = this.#charToNum(input[0], 97);
             const result = this.#charToNum(input[1], 121);
             const you = this.resultsMatrix[elf].indexOf(result);

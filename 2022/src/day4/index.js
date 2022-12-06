@@ -13,8 +13,8 @@ class Day4 extends Day {
         });
     }
 
-    partOne() {
-        return this.input.reduce((prev, [e1, e2]) => {
+    partOne(input) {
+        return input.reduce((prev, [e1, e2]) => {
             if (
                 (e1[0] >= e2[0] && e1[1] <= e2[1]) ||
                 (e2[0] >= e1[0] && e2[1] <= e1[1])
@@ -26,8 +26,8 @@ class Day4 extends Day {
         }, 0);
     }
 
-    partTwo() {
-        return this.input.reduce((prev, [e1, e2]) => {
+    partTwo(input) {
+        return input.reduce((prev, [e1, e2]) => {
             if (
                 (e1[1] >= e2[0] && e1[1] <= e2[1]) ||
                 (e2[1] >= e1[0] && e2[1] <= e1[1])

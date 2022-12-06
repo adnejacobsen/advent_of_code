@@ -14,8 +14,8 @@ class Day3 extends Day {
         return item.charCodeAt() - offset;
     }
 
-    partOne() {
-        return this.input.reduce((total, rucksack) => {
+    partOne(input) {
+        return input.reduce((total, rucksack) => {
             const compA = rucksack.slice(0, rucksack.length / 2);
             const compB = rucksack.slice(rucksack.length / 2);
             const common = compA.filter((i) => compB.includes(i));
@@ -23,8 +23,7 @@ class Day3 extends Day {
         }, 0);
     }
 
-    partTwo() {
-        let input = this.input;
+    partTwo(input) {
         let total = 0;
 
         for (let i = 0; i < input.length; i += 3) {

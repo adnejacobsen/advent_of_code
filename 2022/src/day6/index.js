@@ -23,15 +23,15 @@ class Day6 extends Day {
             index++;
         }
 
-        return index + (length - 1);
+        return index + length - 1;
     }
 
-    partOne() {
-        return this.#findMarker(this.input, 4);
+    partOne(input) {
+        return this.#findMarker(input, 4);
     }
 
-    partTwo() {
-        return this.#findMarker(this.input, 14);
+    partTwo(input) {
+        return this.#findMarker(input, 14);
     }
 }
 
