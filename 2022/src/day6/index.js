@@ -11,9 +11,11 @@ class Day6 extends Day {
 
     #findMarker(input, length) {
         let markerIndex = input.findIndex((_, index) => {
-            return input.slice(index, index + length).every((c, _, chars) => {
-                return chars.indexOf(c) === chars.lastIndexOf(c);
-            });
+            return input
+                .slice(index, index + length)
+                .every((char, _, chars) => {
+                    return chars.indexOf(char) === chars.lastIndexOf(char);
+                });
         });
 
         return markerIndex + length;
