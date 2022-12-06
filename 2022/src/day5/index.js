@@ -7,15 +7,14 @@ class Day5 extends Day {
 
     preprocess(text) {
         let [cargo, moves] = text.split("\n\n").map((l) => l.split("\n"));
-        let indices = cargo.splice(-1)[0];
+        let indices = cargo.pop();
         let boxes = [];
 
         cargo.reverse().forEach((line) => {
             line.split("").forEach((box, index) => {
                 if (box.match(/[A-Z]/g)) {
                     let stackIndex = parseInt(indices[index]) - 1;
-                    if (!boxes[stackIndex]) boxes[stackIndex] = [];
-                    boxes[stackIndex].push(box);
+                    boxes[stackIndex] = [...(boxes[stackIndex] || []), box];
                 }
             });
         });
