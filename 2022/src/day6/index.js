@@ -10,20 +10,13 @@ class Day6 extends Day {
     }
 
     #findMarker(input, length) {
-        let index = 0;
-        let done = false;
-
-        while (!done) {
-            let chars = input.slice(index, index + length);
-
-            done = chars.every((c) => {
+        let markerIndex = input.findIndex((_, index) => {
+            return input.slice(index, index + length).every((c, _, chars) => {
                 return chars.indexOf(c) === chars.lastIndexOf(c);
             });
+        });
 
-            index++;
-        }
-
-        return index + length - 1;
+        return markerIndex + length;
     }
 
     partOne(input) {
