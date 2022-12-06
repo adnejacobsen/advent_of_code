@@ -1,4 +1,7 @@
-### Advent of Code :santa:
+#### Advent of Code :santa:
 
-- 2022: 12/50 :star:
-- 2021: 17/50 :star:
+
+| Year                   | Progress     |      
+|------------------------|--------------|
+| [2022](2022/readme.md) | 12/50 :star: |
+| [2021](2021/readme.md) | 17/50 :star: |
