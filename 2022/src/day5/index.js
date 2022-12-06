@@ -32,9 +32,9 @@ class Day5 extends Day {
     }
 
     partOne() {
-        let boxes = this.input.boxes;
+        let { boxes, moves } = this.input;
 
-        this.input.moves.forEach(([move, from, to]) => {
+        moves.forEach(([move, from, to]) => {
             let f = boxes[from - 1];
             let m = f.splice(f.length - move).reverse();
 
@@ -46,9 +46,9 @@ class Day5 extends Day {
     }
 
     partTwo() {
-        let boxes = this.input.boxes;
+        let { boxes, moves } = this.input;
 
-        this.input.moves.forEach(([move, from, to]) => {
+        moves.forEach(([move, from, to]) => {
             let f = boxes[from - 1];
             let m = f.splice(f.length - move);
 

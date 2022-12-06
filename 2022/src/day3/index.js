@@ -24,12 +24,11 @@ class Day3 extends Day {
     }
 
     partTwo() {
+        let input = this.input;
         let total = 0;
 
-        for (let i = 0; i < this.input.length; i += 3) {
-            const a = this.input[i];
-            const b = this.input[i + 1];
-            const c = this.input[i + 2];
+        for (let i = 0; i < input.length; i += 3) {
+            const [a, b, c] = input.slice(i, i + 3);
             const common = a.filter((i) => b.includes(i) && c.includes(i));
             total += this.#getPriority(common[0]);
         }
