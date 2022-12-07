@@ -6,10 +6,7 @@ class Day7 extends Day {
     }
 
     preprocess(text) {
-        return text.split("\n").map((line) => line.split(" "));
-    }
-
-    #getDirSizes(commands) {
+        let commands = text.split("\n").map((line) => line.split(" "));
         let paths = [];
         let sizes = {};
 
@@ -35,16 +32,12 @@ class Day7 extends Day {
         };
     }
 
-    partOne(input) {
-        const { sizes } = this.#getDirSizes(input);
-
+    partOne({ sizes }) {
         return sizes.filter((s) => s <= 100000).reduce((a, b) => a + b);
     }
 
-    partTwo(input) {
-        const { sizes, total } = this.#getDirSizes(input);
+    partTwo({ sizes, total }) {
         const spaceNeeded = Math.abs(70000000 - total - 30000000);
-
         return sizes.filter((s) => s >= spaceNeeded)[0];
     }
 }
