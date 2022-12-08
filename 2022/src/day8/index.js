@@ -12,21 +12,21 @@ class Day8 extends Day {
     }
 
     #getTreeInfo(forest, x, y) {
-        const h = forest[y][x];
-        const l = forest[y].slice(0, x).reverse();
-        const r = forest[y].slice(x + 1);
-        const b = forest.slice(y + 1).map((row) => row[x]);
-        const t = forest
+        const height = forest[y][x];
+        const left = forest[y].slice(0, x).reverse();
+        const right = forest[y].slice(x + 1);
+        const bottom = forest.slice(y + 1).map((row) => row[x]);
+        const top = forest
             .slice(0, y)
             .map((row) => row[x])
             .reverse();
 
-        const v = [l, r, t, b].map((li) => {
-            let d = li.findIndex((v) => v >= h);
-            return d < 0 ? li.length : d + 1;
+        const view = [left, right, top, bottom].map((row) => {
+            let view = row.findIndex((tree) => tree >= height);
+            return view < 0 ? row.length : view + 1;
         });
 
-        return { h, l, r, t, b, v };
+        return { height, left, right, top, bottom, view };
     }
 
     #loopForest(forest, callback) {
@@ -40,10 +40,12 @@ class Day8 extends Day {
     partOne(input) {
         let visible = 0;
 
-        this.#loopForest(input, ({ h, l, r, t, b }) => {
-            if ([l, r, t, b].some((li) => li.every((n) => n < h))) {
-                visible++;
-            }
+        this.#loopForest(input, ({ height, left, right, top, bottom }) => {
+            let isVisible = [left, right, top, bottom].some((li) => {
+                return li.every((n) => n < height);
+            });
+
+            if (isVisible) visible++;
         });
 
         return visible;
@@ -52,8 +54,8 @@ class Day8 extends Day {
     partTwo(input) {
         const views = [];
 
-        this.#loopForest(input, ({ v }) => {
-            views.push(v.reduce((a, b) => a * b));
+        this.#loopForest(input, ({ view }) => {
+            views.push(view.reduce((a, b) => a * b));
         });
 
         return views.sort((a, b) => b - a)[0];
