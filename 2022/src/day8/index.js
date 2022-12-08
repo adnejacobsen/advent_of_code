@@ -21,9 +21,9 @@ class Day8 extends Day {
             .map((row) => row[x])
             .reverse();
 
-        let v = [l, r, t, b].map((s) => {
-            let d = s.findIndex((v) => v >= h);
-            return d < 0 ? s.length : d + 1;
+        const v = [l, r, t, b].map((li) => {
+            let d = li.findIndex((v) => v >= h);
+            return d < 0 ? li.length : d + 1;
         });
 
         return { h, l, r, t, b, v };
@@ -41,12 +41,7 @@ class Day8 extends Day {
         let visible = 0;
 
         this.#loopForest(input, ({ h, l, r, t, b }) => {
-            if (
-                l.every((n) => n < h) ||
-                r.every((n) => n < h) ||
-                t.every((n) => n < h) ||
-                b.every((n) => n < h)
-            ) {
+            if ([l, r, t, b].some((li) => li.every((n) => n < h))) {
                 visible++;
             }
         });
@@ -55,13 +50,13 @@ class Day8 extends Day {
     }
 
     partTwo(input) {
-        const scenic = [];
+        const views = [];
 
         this.#loopForest(input, ({ v }) => {
-            scenic.push(v[0] * v[1] * v[2] * v[3]);
+            views.push(v.reduce((a, b) => a * b));
         });
 
-        return scenic.sort((a, b) => b - a)[0];
+        return views.sort((a, b) => b - a)[0];
     }
 }
 
