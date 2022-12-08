@@ -21,9 +21,9 @@ class Day8 extends Day {
             .map((row) => row[x])
             .reverse();
 
-        const view = [left, right, top, bottom].map((row) => {
-            let view = row.findIndex((tree) => tree >= height);
-            return view < 0 ? row.length : view + 1;
+        const view = [left, right, top, bottom].map((trees) => {
+            let view = trees.findIndex((tree) => tree >= height);
+            return view < 0 ? trees.length : view + 1;
         });
 
         return { height, left, right, top, bottom, view };
@@ -41,8 +41,8 @@ class Day8 extends Day {
         let visible = 0;
 
         this.#loopForest(input, ({ height, left, right, top, bottom }) => {
-            let isVisible = [left, right, top, bottom].some((li) => {
-                return li.every((n) => n < height);
+            let isVisible = [left, right, top, bottom].some((trees) => {
+                return trees.every((tree) => tree < height);
             });
 
             if (isVisible) visible++;
@@ -55,7 +55,7 @@ class Day8 extends Day {
         const views = [];
 
         this.#loopForest(input, ({ view }) => {
-            views.push(view.reduce((a, b) => a * b));
+            views.push(view.reduce((prev, curr) => prev * curr));
         });
 
         return views.sort((a, b) => b - a)[0];
