@@ -11,77 +11,98 @@ class Day11 extends Day {
             .map((line) => line.split("").map((n) => parseInt(n)));
     }
 
-    partOne(input) {
-        const flash = (octos, x, y, flashed = []) => {
-            let newFlashed = [...flashed, { x: x, y: y }];
-            let newOctos = [...octos];
-            newOctos[x][y] = 0;
+    #flash(octos, x, y, flashed) {
+        let newOctos = [...octos];
+        let newFlashed = { ...flashed };
 
-            for (let ny = y - 1; ny <= y + 1; ny++) {
+        newOctos[y][x] = 0;
+        newFlashed[`${y}-${x}`] = true;
+
+        for (let ny = y - 1; ny <= y + 1; ny++) {
+            if (newOctos[ny]) {
                 for (let nx = x - 1; nx <= x + 1; nx++) {
-                    let exists = newFlashed.find((f) => {
-                        return f.x === nx && f.y === ny;
-                    });
-
                     if (
-                        nx > -1 &&
-                        nx < newOctos[0].length &&
-                        ny > -1 &&
-                        ny < newOctos.length &&
-                        nx !== x &&
-                        ny !== y &&
-                        !exists
+                        newOctos[ny][nx] !== undefined &&
+                        !newFlashed[`${ny}-${nx}`]
                     ) {
-                        if (++newOctos[ny][nx] > 9) {
-                            newOctos[ny][nx] = 0;
+                        newOctos[ny][nx]++;
 
-                            let flashResult = flash(
+                        if (newOctos[ny][nx] > 9) {
+                            let flash = this.#flash(
                                 newOctos,
                                 nx,
                                 ny,
                                 newFlashed
                             );
 
-                            newFlashed = flashResult.flashed;
-                            newOctos = flashResult.octos;
+                            newOctos = flash.octos;
+                            newFlashed = flash.flashed;
+                        }
+                    }
+                }
+            }
+        }
 
-                            /*
-                            console.log(
-                                `x: ${nx} y: ${ny} v: ${newOctos[ny][nx] + 1}`
-                            );
-                            */
+        return { octos: newOctos, flashed: newFlashed };
+    }
+
+    #simulate(input, callback) {
+        let octos = [...input];
+        let done = false;
+        let step = 0;
+
+        while (!done) {
+            let flashed = {};
+
+            for (let y = 0; y < input.length; y++) {
+                for (let x = 0; x < input[0].length; x++) {
+                    if (!flashed[`${y}-${x}`]) {
+                        octos[y][x]++;
+
+                        if (octos[y][x] > 9) {
+                            flashed[`${y}-${x}`] = true;
+                            let flash = this.#flash(octos, x, y, flashed);
+
+                            octos = flash.octos;
+                            flashed = flash.flashed;
                         }
                     }
                 }
             }
 
-            return { octos: newOctos, flashed: newFlashed };
-        };
-
-        let octo = input;
-
-        for (let i = 0; i < 4; i++) {
-            octo = octo.map((y) => y.map((x) => x + 1));
-
-            octo.forEach((line, y) => {
-                console.log(octo[y]);
-
-                line.forEach((value, x) => {
-                    console.log(octo[y][x]);
-                    if (octo[y][x] > 9) {
-                        let flashResult = flash(octo, x, y);
-                        octo = flashResult.octos;
-                        console.log(octo[y][x]);
-                    }
-                });
+            callback(step, octos, flashed, () => {
+                done = true;
             });
-        }
 
-        return null;
+            step++;
+        }
+    }
+
+    partOne(input) {
+        let total = 0;
+
+        this.#simulate(input, (step, octos, flashed, done) => {
+            if (step === 100) {
+                done();
+            } else {
+                total += Object.keys(flashed).length;
+            }
+        });
+
+        return total;
     }
 
     partTwo(input) {
-        return null;
+        let syncStep = null;
+
+        this.#simulate(input, (step, octos, flashed, done) => {
+            if (Object.keys(flashed).length === 100) {
+                syncStep = step + 1;
+                done();
+            }
+        });
+
+        return syncStep;
     }
 }
 
