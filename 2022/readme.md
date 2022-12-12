@@ -1,5 +1,5 @@
 #### Advent of Code 2022 
-20/50 :star:
+24/50 :star:
 ##### Language
 Node (JavaScript)
 
