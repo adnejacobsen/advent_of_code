@@ -1,0 +1,13 @@
+{
+  "name": "advent_of_code2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./run-day.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

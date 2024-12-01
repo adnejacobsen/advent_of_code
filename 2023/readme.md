@@ -1,6 +1,6 @@
-#### Advent of Code 2022
+#### Advent of Code 2023
 
-29/50 :star:
+1/50 :star:
 
 ##### Language
 
@@ -17,6 +17,6 @@ Example:
 
 ```bash
 # Running day 2 solution
-cd 2022
+cd 2023
 npm run start -- 2
 ```

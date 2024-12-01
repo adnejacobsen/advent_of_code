@@ -1,15 +1,20 @@
 #### Advent of Code 2021
+
 22/50 :star:
+
 ##### Language
+
 Node (JavaScript)
 
-
 ##### Requirements
-- node
-- npm
+
+-   node
+-   npm
 
 ##### How to run
+
 Example:
+
 ```bash
 # Running day 2 solution
 cd 2021
