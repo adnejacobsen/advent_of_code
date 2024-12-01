@@ -28,7 +28,7 @@ export class Day {
     }
 
     solve() {
-        console.log(`2022 Day ${this.#num}`);
+        console.log(`2023 Day ${this.#num}`);
         console.log(`Part 1: ${this.partOne(this.#getInput())}`);
         console.log(`Part 2: ${this.partTwo(this.#getInput())}`);
     }
