@@ -7,12 +7,12 @@ class Day1 extends Day {
 
     partOne(input) {
         return input.reduce((prev, curr) => {
-            const nums = curr.split("").filter((v) => !isNaN(parseInt(v)));
-            return prev + parseInt(nums.at(0) + nums.at(-1));
+            const nums = curr.split("").filter((c) => !isNaN(c));
+            return prev + parseInt(`${nums.at(0)}${nums.at(-1)}`);
         }, 0);
     }
 
-    partTwo(input) {
+    #searchFirstNumber(line, reverse = false) {
         const DIGIT_MAP = {
             one: "1",
             two: "2",
@@ -25,17 +25,53 @@ class Day1 extends Day {
             nine: "9",
         };
 
-        let newInput = input.map((line) => {
-            let newLine = `${line}`;
+        let newLine = `${line}`;
 
-            Object.keys(DIGIT_MAP).forEach((digit) => {
-                newLine = newLine.replace(digit, DIGIT_MAP[digit]);
-            });
+        for (
+            let i = reverse ? newLine.length - 1 : -4;
+            (reverse && i > 0) || (!reverse && i < newLine.length);
+            i += reverse ? -1 : 1
+        ) {
+            let start = i < 0 ? 0 : i;
+            let end = i + 5;
+            let section = newLine.slice(start, end);
+            let before = "";
+            let after = "";
 
-            return newLine;
+            if (start > 0) {
+                before = newLine.slice(0, start);
+            }
+
+            if (end < newLine.length) {
+                after = newLine.slice(end);
+            }
+
+            let newSection = Object.keys(DIGIT_MAP).reduce((prev, key) => {
+                return prev.replaceAll(key, DIGIT_MAP[key]);
+            }, section);
+
+            if (newSection !== section) {
+                newLine = `${before}${newSection}${after}`;
+            }
+        }
+
+        return newLine
+            .split("")
+            .filter((c) => !isNaN(c))
+            .at(reverse ? -1 : 0);
+    }
+
+    partTwo(input) {
+        let total = 0;
+
+        input.forEach((line) => {
+            let first = this.#searchFirstNumber(line);
+            let last = this.#searchFirstNumber(line, true);
+
+            total += parseInt(`${first}${last}`);
         });
 
-        return this.partOne(newInput);
+        return total;
     }
 }
 
