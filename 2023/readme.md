@@ -1,6 +1,6 @@
 #### Advent of Code 2023
 
-1/50 :star:
+2/50 :star:
 
 ##### Language
 
