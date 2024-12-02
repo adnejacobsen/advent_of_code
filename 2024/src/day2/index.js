@@ -1,4 +1,4 @@
-import { Day } from "../../../2023/src/utils.js";
+import { Day } from "../utils.js";
 
 class Day2 extends Day {
     constructor() {
