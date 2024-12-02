@@ -30,23 +30,16 @@ class Day2 extends Day {
     }
 
     partTwo(input) {
-        return input.filter((report) => {
-            let up = report[1] - report[0] > 0;
-            let safe = this.#isSafe(report, up);
+        return input.filter((originalReport) => {
+            let reports = originalReport.map((_, index) => {
+                let newReport = [...originalReport];
+                newReport.splice(index, 1);
+                return newReport;
+            });
 
-            if (!safe) {
-                for (let i = 0; i < report.length; i++) {
-                    let newReport = [...report];
-                    newReport.splice(i, 1);
-                    let newUp = newReport[1] - newReport[0] > 0;
-
-                    if (this.#isSafe(newReport, newUp)) {
-                        return true;
-                    }
-                }
-            }
-
-            return safe;
+            return [...reports, originalReport].some((report) => {
+                return this.#isSafe(report, report[1] - report[0] > 0);
+            });
         }).length;
     }
 }
