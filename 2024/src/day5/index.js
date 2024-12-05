@@ -19,20 +19,12 @@ class Day5 extends Day {
     }
 
     #getBrokenRules(update, rules) {
-        let broken = [];
-
-        rules.forEach(([x, y]) => {
+        return rules.filter(([x, y]) => {
             let xIndex = update.findIndex((n) => n === x);
             let yIndex = update.findIndex((n) => n === y);
 
-            if (xIndex !== -1 && yIndex !== -1) {
-                if (xIndex > yIndex) {
-                    broken.push([x, y]);
-                }
-            }
+            return xIndex !== -1 && yIndex !== -1 && xIndex > yIndex;
         });
-
-        return broken;
     }
 
     partOne({ rules, updates }) {
