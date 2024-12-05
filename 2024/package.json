@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./run-day.sh"
+    "start": "./tools/run-day.sh",
+    "create": "./tools/create-day.sh"
   },
   "author": "",
   "license": "ISC",

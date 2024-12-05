@@ -35,25 +35,22 @@ class Day5 extends Day {
     }
 
     partTwo({ rules, updates }) {
-        return updates.reduce((total, curr) => {
-            let initialBroken = this.#getBrokenRules(curr, rules);
+        return updates.reduce((total, update) => {
+            let brokenRules = this.#getBrokenRules(update, rules);
 
-            if (initialBroken.length > 0) {
-                let fixed = [...curr];
-                let broken = [...initialBroken];
+            if (brokenRules.length > 0) {
+                while (brokenRules.length > 0) {
+                    let [x, y] = brokenRules[0];
+                    let xIndex = update.findIndex((n) => n === x);
+                    let yIndex = update.findIndex((n) => n === y);
 
-                while (broken.length > 0) {
-                    let [x, y] = broken[0];
-                    let xIndex = fixed.findIndex((n) => n === x);
-                    let yIndex = fixed.findIndex((n) => n === y);
+                    update[xIndex] = y;
+                    update[yIndex] = x;
 
-                    fixed[xIndex] = y;
-                    fixed[yIndex] = x;
-
-                    broken = this.#getBrokenRules(fixed, rules);
+                    brokenRules = this.#getBrokenRules(update, rules);
                 }
 
-                return total + fixed[(fixed.length - 1) / 2];
+                return total + update[(update.length - 1) / 2];
             }
 
             return total;

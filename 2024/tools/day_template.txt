@@ -1,0 +1,21 @@
+import { Day } from "../utils.js";
+
+class DayDAY_NUM extends Day {
+    constructor() {
+        super(DAY_NUM);
+    }
+
+    preprocess(text) {
+        return text;
+    }
+
+    partOne(input) {
+        return null;
+    }
+
+    partTwo(input) {
+        return null;
+    }
+}
+
+new DayDAY_NUM().solve();
