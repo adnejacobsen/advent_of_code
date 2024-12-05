@@ -18,9 +18,7 @@ class Day5 extends Day {
         };
     }
 
-    #isUpdateCorrect(update, rules) {
-        let correct = true;
-        let applicable = [];
+    #getBrokenRules(update, rules) {
         let broken = [];
 
         rules.forEach(([x, y]) => {
@@ -28,32 +26,29 @@ class Day5 extends Day {
             let yIndex = update.findIndex((n) => n === y);
 
             if (xIndex !== -1 && yIndex !== -1) {
-                applicable.push([x, y]);
-
                 if (xIndex > yIndex) {
                     broken.push([x, y]);
-                    correct = false;
                 }
             }
         });
 
-        return { correct, applicable, broken };
+        return broken;
     }
 
     partOne({ rules, updates }) {
         return updates.reduce((prev, curr) => {
-            let { correct } = this.#isUpdateCorrect(curr, rules);
+            let correct = this.#getBrokenRules(curr, rules).length === 0;
             return prev + (correct ? curr[(curr.length - 1) / 2] : 0);
         }, 0);
     }
 
     partTwo({ rules, updates }) {
         return updates.reduce((total, curr) => {
-            let initial = this.#isUpdateCorrect(curr, rules);
+            let initialBroken = this.#getBrokenRules(curr, rules);
 
-            if (!initial.correct) {
+            if (initialBroken.length > 0) {
                 let fixed = [...curr];
-                let broken = initial.broken;
+                let broken = [...initialBroken];
 
                 while (broken.length > 0) {
                     let [x, y] = broken[0];
@@ -63,7 +58,7 @@ class Day5 extends Day {
                     fixed[xIndex] = y;
                     fixed[yIndex] = x;
 
-                    broken = this.#isUpdateCorrect(fixed, rules).broken;
+                    broken = this.#getBrokenRules(fixed, rules);
                 }
 
                 return total + fixed[(fixed.length - 1) / 2];
