@@ -25,7 +25,7 @@ class Day2 extends Day {
 
     partOne(input) {
         return input.filter((report) => {
-            return this.#isSafe(report, report[1] - report[0] > 0);
+            return this.#isSafe(report, report[1] > report[0]);
         }).length;
     }
 
@@ -38,7 +38,7 @@ class Day2 extends Day {
             });
 
             return [...reports, originalReport].some((report) => {
-                return this.#isSafe(report, report[1] - report[0] > 0);
+                return this.#isSafe(report, report[1] > report[0]);
             });
         }).length;
     }
