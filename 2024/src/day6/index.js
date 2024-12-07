@@ -1,29 +1,27 @@
 import { Day } from "../utils.js";
 
 class Day6 extends Day {
-    #guardMap;
+    #guardMap = {
+        "^": {
+            dirs: [0, -1],
+            turn: ">",
+        },
+        ">": {
+            dirs: [1, 0],
+            turn: "v",
+        },
+        v: {
+            dirs: [0, 1],
+            turn: "<",
+        },
+        "<": {
+            dirs: [-1, 0],
+            turn: "^",
+        },
+    };
 
     constructor() {
         super(6);
-
-        this.#guardMap = {
-            "^": {
-                dirs: [0, -1],
-                turn: ">",
-            },
-            ">": {
-                dirs: [1, 0],
-                turn: "v",
-            },
-            v: {
-                dirs: [0, 1],
-                turn: "<",
-            },
-            "<": {
-                dirs: [-1, 0],
-                turn: "^",
-            },
-        };
     }
 
     preprocess(text) {
