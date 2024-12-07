@@ -28,9 +28,9 @@ class Day5 extends Day {
     }
 
     partOne({ rules, updates }) {
-        return updates.reduce((prev, curr) => {
-            let correct = this.#getBrokenRules(curr, rules).length === 0;
-            return prev + (correct ? curr[(curr.length - 1) / 2] : 0);
+        return updates.reduce((total, update) => {
+            let correct = this.#getBrokenRules(update, rules).length === 0;
+            return total + (correct ? update[(update.length - 1) / 2] : 0);
         }, 0);
     }
 
