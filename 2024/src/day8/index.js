@@ -14,11 +14,7 @@ class Day8 extends Day {
                 let c = map[y][x];
 
                 if (c !== ".") {
-                    if (!antennas[c]) {
-                        antennas[c] = [];
-                    }
-
-                    antennas[c].push([x, y]);
+                    antennas[c] = [...(antennas[c] || []), [x, y]];
                 }
             }
         }
