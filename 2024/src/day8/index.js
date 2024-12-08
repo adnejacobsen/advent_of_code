@@ -58,7 +58,7 @@ class Day8 extends Day {
                     let x3 = x2 + xVec;
                     let y3 = y2 + yVec;
 
-                    while (map?.[y3]?.[x3] !== undefined) {
+                    while (map?.[y3]?.[x3]) {
                         antinodes.add(`${x3},${y3}`);
                         x3 += xVec;
                         y3 += yVec;
