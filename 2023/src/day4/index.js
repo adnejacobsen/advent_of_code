@@ -23,51 +23,48 @@ class Day4 extends Day {
         });
     }
 
+    #getPoints(input, index, follow = false) {
+        let { winners, numbers } = input[index];
+        let totalPoints = 0;
+        let cardPoints = winners.reduce((points, winner) => {
+            return points + (numbers.includes(winner) ? 1 : 0);
+        }, 0);
+
+        totalPoints += cardPoints;
+
+        if (follow && cardPoints) {
+            for (let i = index + 1; i < index + 1 + cardPoints; i++) {
+                totalPoints += this.#getPoints(input, i, true);
+            }
+        }
+
+        return totalPoints;
+    }
+
     partOne(input) {
         let total = 0;
 
-        input.forEach(({ winners, numbers }) => {
-            let points = 0;
+        for (let i = 0; i < input.length; i++) {
+            let points = this.#getPoints(input, i, false);
 
-            winners.forEach((winner) => {
-                if (numbers.includes(winner)) {
-                    if (points == 0) {
-                        points = 1;
-                    } else {
-                        points = points * 2;
-                    }
-                }
-            });
-
-            total += points;
-            points = 0;
-        });
+            if (points > 1) {
+                total += 2 ** (points - 1);
+            } else {
+                total += points;
+            }
+        }
 
         return total;
     }
 
-    partTwo(input, index = 0, stop = undefined, total = 0) {
-        let newTotal = total;
+    partTwo(input) {
+        let total = input.length;
 
-        for (let i = index; i <= stop || input.length - 1; i++) {
-            const { winners, numbers } = input[i];
-            let points = 0;
-
-            winners.forEach((winner) => {
-                if (numbers.includes(winner)) {
-                    points += 1;
-                }
-            });
-
-            if (points > 0) {
-                newTotal += this.partTwo(input, i + 1, i + points, newTotal);
-            }
-
-            newTotal += points;
-            points = 0;
+        for (let i = 0; i < input.length; i++) {
+            total += this.#getPoints(input, i, true);
         }
 
-        return newTotal;
+        return total;
     }
 }
 
