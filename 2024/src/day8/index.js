@@ -31,10 +31,11 @@ class Day8 extends Day {
 
         for (let coo of Object.values(antennas)) {
             for (let i = 0; i < coo.length; i++) {
+                let [x1, y1] = coo[i];
+
                 for (let j = 0; j < coo.length; j++) {
                     if (i === j) continue;
 
-                    let [x1, y1] = coo[i];
                     let [x2, y2] = coo[j];
                     let xVec = x2 - x1;
                     let yVec = y2 - y1;
