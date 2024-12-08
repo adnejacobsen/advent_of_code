@@ -30,17 +30,12 @@ class Day8 extends Day {
         let antinodes = new Set();
 
         for (let coo of Object.values(antennas)) {
-            for (let i = 0; i < coo.length; i++) {
-                let [x1, y1] = coo[i];
+            for (let [x1, y1] of coo) {
+                for (let [x2, y2] of coo) {
+                    if (x1 === x2 && y1 === y2) continue;
 
-                for (let j = 0; j < coo.length; j++) {
-                    if (i === j) continue;
-
-                    let [x2, y2] = coo[j];
-                    let xVec = x2 - x1;
-                    let yVec = y2 - y1;
-                    let x3 = x2 + xVec;
-                    let y3 = y2 + yVec;
+                    let x3 = x2 + (x2 - x1);
+                    let y3 = y2 + (y2 - y1);
 
                     if (map?.[y3]?.[x3]) {
                         antinodes.add(`${x3},${y3}`);
@@ -56,15 +51,12 @@ class Day8 extends Day {
         let antinodes = new Set();
 
         for (let coo of Object.values(antennas)) {
-            for (let i = 0; i < coo.length; i++) {
-                let [x1, y1] = coo[i];
-
+            for (let [x1, y1] of coo) {
                 antinodes.add(`${x1},${y1}`);
 
-                for (let j = 0; j < coo.length; j++) {
-                    if (i === j) continue;
+                for (let [x2, y2] of coo) {
+                    if (x1 === x2 && y1 === y2) continue;
 
-                    let [x2, y2] = coo[j];
                     let xVec = x2 - x1;
                     let yVec = y2 - y1;
                     let x3 = x2 + xVec;
