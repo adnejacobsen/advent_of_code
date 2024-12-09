@@ -38,23 +38,11 @@ class Day9 extends Day {
         }, 0);
     }
 
-    #getFirstFree(disk) {
-        for (let i = 0; i < disk.length; i++) {
-            if (disk[i] === ".") return i;
-        }
-    }
-
-    #getLastData(disk) {
-        for (let i = disk.length - 1; i >= 0; i--) {
-            if (disk[i] !== ".") return i;
-        }
-    }
-
     partOne({ disk }) {
         for (let i = disk.length - 1; i > 0; i--) {
             let curr = disk[i];
-            let firstFree = this.#getFirstFree(disk);
-            let lastData = this.#getLastData(disk);
+            let firstFree = disk.findIndex((c) => c === ".");
+            let lastData = disk.findLastIndex((c) => c !== ".");
 
             if (lastData < firstFree) break;
 
