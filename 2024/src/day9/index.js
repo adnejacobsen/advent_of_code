@@ -42,9 +42,8 @@ class Day9 extends Day {
         for (let i = disk.length - 1; i > 0; i--) {
             let curr = disk[i];
             let firstFree = disk.findIndex((c) => c === ".");
-            let lastData = disk.findLastIndex((c) => c !== ".");
 
-            if (lastData < firstFree) break;
+            if (i < firstFree) break;
 
             if (curr !== "." && firstFree > -1) {
                 disk[firstFree] = curr;
