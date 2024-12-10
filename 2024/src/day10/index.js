@@ -25,7 +25,10 @@ class Day10 extends Day {
             if (next === curr + 1) {
                 if (next === 9) {
                     let peakId = `${xNext},${yNext}`;
-                    paths[peakId] = [...(paths[peakId] || []), path];
+                    paths[peakId] = [
+                        ...(paths[peakId] || []),
+                        [...path, [xNext, yNext]],
+                    ];
                 } else {
                     paths = this.#getPeaks(map, xNext, yNext, path, paths);
                 }
