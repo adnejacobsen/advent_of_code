@@ -7,6 +7,7 @@ class Day10 extends Day {
         [1, 0],
         [0, -1],
     ];
+
     constructor() {
         super(10);
     }
