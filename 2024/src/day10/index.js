@@ -22,8 +22,6 @@ class Day10 extends Day {
             let yNext = y + yDir;
             let next = map?.[yNext]?.[xNext];
 
-            if (next === undefined) continue;
-
             if (next === curr + 1) {
                 if (next === 9) {
                     let peakId = `${xNext},${yNext}`;
