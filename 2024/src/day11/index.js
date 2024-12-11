@@ -25,9 +25,8 @@ class Day11 extends Day {
                 if (stone === "0") {
                     newStones.push("1");
                 } else if (stone.length % 2 == 0) {
-                    let left = parseInt(stone.slice(0, stone.length / 2));
-                    let right = parseInt(stone.slice(stone.length / 2));
-                    newStones.push(...[left, right]);
+                    newStones.push(parseInt(stone.slice(0, stone.length / 2)));
+                    newStones.push(parseInt(stone.slice(stone.length / 2)));
                 } else {
                     newStones.push(parseInt(stone) * 2024);
                 }
