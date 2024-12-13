@@ -1,6 +1,6 @@
 #### Advent of Code 2024
 
-22/50 :star:
+25/50 :star:
 
 ##### Language
 
