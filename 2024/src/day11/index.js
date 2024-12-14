@@ -10,12 +10,11 @@ class Day11 extends Day {
     }
 
     #blink(stones, amount) {
-        let blinks = 0;
         let prevStones = stones.reduce((prev, curr) => {
             return { ...prev, [curr]: 1 };
         }, {});
 
-        while (blinks < amount) {
+        for (let i = 0; i < amount; i++) {
             let nextStones = {};
 
             for (let stone in prevStones) {
@@ -37,7 +36,6 @@ class Day11 extends Day {
             }
 
             prevStones = nextStones;
-            blinks++;
         }
 
         return Object.values(prevStones).reduce((prev, curr) => {
